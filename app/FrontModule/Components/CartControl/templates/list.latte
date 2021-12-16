@@ -1,0 +1,17 @@
+{varType App\Model\Entities\Cart $cart}
+
+{if empty($cart->items)}
+    Košík je prázdný
+{else}
+    <table class="table table-hover">
+        {foreach $cart->items as $item}
+            <tr>
+                <th>{$item->product->title}</th>
+                <td>{$item->count}</td>
+                <td>
+                    {link remove! $item->cartItemId}
+                </td>
+            </tr>
+        {/foreach}
+    </table>
+{/if}

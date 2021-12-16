@@ -68,7 +68,6 @@ class ProductPresenter extends BasePresenter{
                 $cart->addToCart($product,(int)$form->values->count);
                 $this->redirect('this');
             };
-
             return $form;
         });
     }
