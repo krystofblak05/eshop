@@ -2,12 +2,15 @@
 
 namespace App\FrontModule\Presenters;
 
+use App\FrontModule\Components\ProductCartForm\ProductCartForm;
 use App\FrontModule\Components\ProductCartForm\ProductCartFormFactory;
 use App\Model\Entities\Comments;
 use App\Model\Facades\CommentsFacade;
 use App\Model\Facades\ProductsFacade;
+use mysql_xdevapi\Exception;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
+use Nette\Application\UI\Multiplier;
 
 /**
  * Class ProductPresenter
@@ -47,6 +50,28 @@ class ProductPresenter extends BasePresenter{
     //TODO tady by mělo přibýt filtrování podle kategorie, stránkování atp.
     $this->template->products = $this->productsFacade->findProducts(['order'=>'title']);
   }
+
+    protected function createComponentProductCartForm():Multiplier{
+        return new Multiplier(function($productId){
+            $form = $this->productCartFormFactory->create();
+            $form->setDefaults(['productId'=>$productId]);
+            $form->onSubmit[]=function (ProductCartForm  $form){
+
+                try {
+                    $product = $this->productsFacade->getProduct($form->values->productId);
+
+                }catch (Exception $e){
+                    $this->flashMessage('nelze pridat','error');
+                    $this->redirect('this');
+                }
+                $cart = $this->getComponent('cart');
+                $cart->addToCart($product,(int)$form->values->count);
+                $this->redirect('this');
+            };
+
+            return $form;
+        });
+    }
 
     #region commentForm
     protected function createComponentCommentForm(): Form
