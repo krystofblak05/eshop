@@ -4,9 +4,8 @@ namespace App\Model\Authorization;
 
 use App\Model\Entities\Category;
 use App\Model\Entities\Permission;
-use App\Model\Entities\Role;
 use App\Model\Facades\UsersFacade;
-#use Nette\Security\Role;
+use Nette\Security\Role;
 
 /**
  * Class Authorizator

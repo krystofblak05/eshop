@@ -1,7 +1,7 @@
 parameters:
     mailFrom:
-        email: 'veim01@vse.cz'
-        name: 'veim01 eshop'
+        email: 'blak05@vse.cz'
+        name: 'blak05 eshop'
 
     database:
         driver: mysqli

@@ -15,17 +15,6 @@ class ProductsFacade{
   /** @var ProductRepository $productRepository */
   private $productRepository;
 
-    /**
-     * Metoda pro vyhledání úkolů
-     * @param array|null $params = null
-     * @param int $offset = null
-     * @param int $limit = null
-     * @return Products[]
-     */
-    public function findTodos(array $params=null,int $offset=null,int $limit=null):array {
-        return $this->productRepository->findAllBy($params,$offset,$limit);
-    }
-
   /**
    * Metoda pro získání jednoho produktu
    * @param int $id

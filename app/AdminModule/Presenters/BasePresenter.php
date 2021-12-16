@@ -22,7 +22,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
 
     if (!$this->user->isAllowed($presenterName,$action)){
       if ($this->user->isLoggedIn()){
-        #throw new ForbiddenRequestException();
+        throw new ForbiddenRequestException();
       }else{
         $this->flashMessage('Pro zobrazení požadovaného obsahu se musíte přihlásit!','warning');
         //uložíme původní požadavek - předáme ho do persistentní proměnné v UserPresenteru
